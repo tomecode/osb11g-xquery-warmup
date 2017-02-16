@@ -2,28 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tomecode.oracle.osb11g</groupId>
-	<artifactId>osb11g-xquery-compiler</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>maven-plugin</packaging>
+	<artifactId>osb11g-xquery-warmup</artifactId>
+	<version>1.0.0</version>
+
 
 	<properties>
-		<fmw11gHome>c:/Oracle/FMW11g</fmw11gHome>
 		<wls11gHome>c:/Oracle/FMW11g/wlserver_10.3</wls11gHome>
 		<osb11gHome>c:/Oracle/FMW11g/Oracle_OSB1</osb11gHome>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.apache.maven.plugin-tools</groupId>
-			<artifactId>maven-plugin-annotations</artifactId>
-			<version>3.4</version>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.maven</groupId>
-			<artifactId>maven-plugin-api</artifactId>
-			<version>3.3.9</version>
-		</dependency>
 		<dependency>
 			<groupId>com.oracle.weblogic</groupId>
 			<artifactId>weblogic</artifactId>
@@ -73,75 +61,58 @@
 			<scope>system</scope>
 			<systemPath>${osb11gHome}/modules/com.bea.core.xquery_1.7.0.0.jar</systemPath>
 		</dependency>
-		<dependency>
-			<groupId>com.oracle.weblogic</groupId>
-			<artifactId>com.bea.core.xml.xmlbeans</artifactId>
-			<version>11g</version>
-			<scope>system</scope>
-			<systemPath>${fmw11gHome}/modules/com.bea.core.xml.xmlbeans_2.2.0.0.jar</systemPath>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>compile</scope>
-		</dependency>
+
+
+
 	</dependencies>
 
 
-<build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.10.3</version>
-				<configuration>
-					<additionalparam>-Xdoclint:none</additionalparam>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-site-plugin</artifactId>
-				<version>3.3</version>
-				<configuration>
-					<reportPlugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-							<artifactId>maven-javadoc-plugin</artifactId>
-							<configuration>
-								<additionalparam>-Xdoclint:none</additionalparam>
-							</configuration>
-						</plugin>
-					</reportPlugins>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
 				<configuration>
-					<!-- or whatever version you use -->
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-plugin-plugin</artifactId>
-				<version>3.2</version>
-				<configuration>
-					<!-- see http://jira.codehaus.org/browse/MNG-5346 -->
-					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
-				</configuration>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
-						<id>mojo-descriptor</id>
+						<id>ear</id>
+						<phase>package</phase>
 						<goals>
-							<goal>descriptor</goal>
+							<goal>single</goal>
 						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<archiverConfig>
+								<appxml>${basedir}/src/main/ear/META-INF/application.xml</appxml>
+							</archiverConfig>
+							<archive>
+								<manifest>
+									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+									<addClasspath>true</addClasspath>
+								</manifest>
+								<manifestEntries>
+									<Specification-Version>1.0</Specification-Version>
+									<Implementation-Version>${project.version}-${maven.build.timestamp}</Implementation-Version>
+									<Class-Path>APP-INF/lib/${project.artifactId}.jar</Class-Path>
+								</manifestEntries>
+							</archive>
+							<descriptors>
+								<descriptor>${basedir}/src/main/assembly/ear.xml</descriptor>
+							</descriptors>
+							<finalName>${project.artifactId}</finalName>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
