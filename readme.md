@@ -1,5 +1,5 @@
 # osb11g-xquery-warmup
-Recompile all XQueries in OSB 11g at runtime
+Recompile/warm-up any XQueries at runtime in the OSB 11g
 
 # What is it
   - a simple application (packaged as EAR) deployed in OSB/WLS
@@ -9,7 +9,7 @@ Recompile all XQueries in OSB 11g at runtime
 # Install
   - Download latest version of application...
   - Deploy it as enterprise application: _'Install this deployment as an application'_
-  - Deployment Order: 20
+  - Deployment Order: 80
   - Restart the OSB.
 
 # Development
