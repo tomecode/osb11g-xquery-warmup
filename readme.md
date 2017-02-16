@@ -17,7 +17,6 @@ Recompile all XQueries in OSB 11g at runtime
   - JVM 1.6
   - in pom.xml change path for following properties:
 | Plugin | README |
-| fmw11gHome | path to FMW 11g home |
 | wls11gHome | path to FMW WLS 11g home |
 | osb11gHome | path to FMW OSB 11G home |
   - mvn clean install
