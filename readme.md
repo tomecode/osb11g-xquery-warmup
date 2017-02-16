@@ -7,7 +7,7 @@ Recompile all XQueries in OSB 11g at runtime
   - pre-compile/execute Xquery with dummy arguments - warm-up 
 
 # Install
-  - Download package
+  - Download latest version of application...
   - Deploy it as enterprise application: _'Install this deployment as an application'_
   - Deployment Order: 20
   - Restart the OSB.
