@@ -15,7 +15,8 @@ Recompile/warm-up any XQueries at runtime in the OSB 11g
 # Development
   - Build is based on the Maven
   - JVM 1.6
-  - in pom.xml change path for following properties:
+  - in pom.xml setup the following properties:
+  
 | Plugin | README |
 | wls11gHome | path to FMW WLS 11g home |
 | osb11gHome | path to FMW OSB 11G home |
