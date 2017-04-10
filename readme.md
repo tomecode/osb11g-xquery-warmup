@@ -22,3 +22,5 @@ Recompile/warm-up any XQueries at runtime in the OSB 11g
 | wls11gHome | path to FMW WLS 11g home |
 | osb11gHome | path to FMW OSB 11G home |
   - mvn clean install
+
+This project is member of [OSB utilities](https://github.com/tomecode/osb-utilities)
